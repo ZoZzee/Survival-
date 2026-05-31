@@ -44,12 +44,12 @@ public class PlayerInteraction : MonoBehaviour
                     Destroy(hit.collider.gameObject);
                 }
             }
-            if (hit.collider.gameObject.TryGetComponent<StuffInteraction>(out StuffInteraction stuffInteraction))
+            if (hit.collider.gameObject.TryGetComponent<SubjectInteraction>(out SubjectInteraction subjectInteraction))
             {
-                _interactionText.text = stuffInteraction.stuff.stuffName;
+                _interactionText.text = subjectInteraction.subject.subjectName;
                 if (_interactAction.action.triggered)
                 {
-                    _needManager.Sleep.Restore(_needManager.sleepMax);
+                    Debug.Log("Bed");
                 }
             }
         }

@@ -180,7 +180,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -896,7 +897,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 116cb3f4638974f47bc3dd305b813ac3, type: 2}
+  - {fileID: 2100000, guid: 6ec229761962b29439cdce18ffe7989d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1111,7 +1112,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 116cb3f4638974f47bc3dd305b813ac3, type: 2}
+  - {fileID: 2100000, guid: 040bc64587f4e4942b283c87f134088d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1301,7 +1302,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 116cb3f4638974f47bc3dd305b813ac3, type: 2}
+  - {fileID: 2100000, guid: 040bc64587f4e4942b283c87f134088d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1487,7 +1488,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 116cb3f4638974f47bc3dd305b813ac3, type: 2}
+  - {fileID: 2100000, guid: 040bc64587f4e4942b283c87f134088d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1940,6 +1941,24 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d26481cb9055aa44b25c386c04daed3, type: 3}
+--- !u!1 &1430464205 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6572448292443819264, guid: ab2e008901109ad42bb5041f42d2e34a, type: 3}
+  m_PrefabInstance: {fileID: 8593348579843229437}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1430464212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430464205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f71d8933d5c729458a1cd2c62829421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SubjectInteraction
+  subject: {fileID: 11400000, guid: cb0c1ce3f9768fb418dde7f281a283ee, type: 2}
 --- !u!1 &1566552547
 GameObject:
   m_ObjectHideFlags: 0
@@ -2005,7 +2024,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 116cb3f4638974f47bc3dd305b813ac3, type: 2}
+  - {fileID: 2100000, guid: 040bc64587f4e4942b283c87f134088d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8074,10 +8093,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tent
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6946020529003819310, guid: ab2e008901109ad42bb5041f42d2e34a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6572448292443819264, guid: ab2e008901109ad42bb5041f42d2e34a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1430464212}
   m_SourcePrefab: {fileID: 100100000, guid: ab2e008901109ad42bb5041f42d2e34a, type: 3}
 --- !u!1 &8621032079160285008
 GameObject:
