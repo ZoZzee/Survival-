@@ -12,9 +12,10 @@ public class PlayerInteraction : MonoBehaviour
 
     [Header(" UI")]
     [SerializeField] private TMP_Text _interactionText;
+    [SerializeField] private Effects UI_Effects;
 
     [Header("Referenses")]
-    [SerializeField] private NeedsManager _needManager;
+    [SerializeField] private NeedsManager _needsManager;
     [SerializeField] private Inventory _playerInventory;
     [SerializeField] private inventoryController _inventoryController;
 
@@ -25,6 +26,7 @@ public class PlayerInteraction : MonoBehaviour
     private Camera mainCamera;
     private void Start()
     {
+        _needsManager = NeedsManager.instance;
         mainCamera = Camera.main;
     }
     private void Update()
@@ -49,7 +51,12 @@ public class PlayerInteraction : MonoBehaviour
                 _interactionText.text = subjectInteraction.subject.subjectName;
                 if (_interactAction.action.triggered)
                 {
-                    Debug.Log("Bed");
+                    if (subjectInteraction.subject.subjectName == "Bed")
+                    {
+                        UI_Effects.Sleep();
+                        _needsManager.Sleeping(subjectInteraction.subject);
+                    }
+
                 }
             }
         }
@@ -65,11 +72,16 @@ public class PlayerInteraction : MonoBehaviour
             RaycastHit hitTool;
             if (Physics.Raycast(rayTool, out hitTool, _toolsUseDistance))
             {
-                if(hitTool.collider.gameObject.TryGetComponent<Resourse>(out Resourse resourse))
+                if (hitTool.collider.gameObject.TryGetComponent<Resourse>(out Resourse resourse))
                 {
-
+                    resourse.TryHit(_inventoryController.currentTool.tool,_playerInventory);
                 }
             }
         }
     }
+
+    //private Coroutine
+    //{
+
+    //}
 }

@@ -30,7 +30,7 @@ public abstract class Need
         Current = Mathf.Clamp(Current, minValue, Max);
     }
 
-    public virtual void PermanentRestore(float amount, float deltaTime)
+    public virtual void CustomPermanentRestore(float amount, float deltaTime)
     {
         Current += amount * deltaTime;
         Current = Mathf.Clamp(Current, minValue, Max);

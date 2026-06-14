@@ -19,4 +19,5 @@ public class Interaction
     public float healthAmount;
     public float hungerAmount;
     public float energyAmount;
+    public float sleepAmount;
 }

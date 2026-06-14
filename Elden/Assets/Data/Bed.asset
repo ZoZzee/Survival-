@@ -17,6 +17,7 @@ MonoBehaviour:
   prefab: {fileID: 919132149155446097, guid: ae783d5c290f9994b9e7f0349579e8d9, type: 3}
   usable:
     isUsable: 1
-    healthAmount: 0
+    healthAmount: 20
     hungerAmount: -10
     energyAmount: 100
+    sleepAmount: 100

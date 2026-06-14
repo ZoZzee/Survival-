@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Resourse : MonoBehaviour
@@ -10,6 +11,8 @@ public class Resourse : MonoBehaviour
 
     public float durability;
     public Tool.ToolType toolType;
+
+    public event Action onGetResourses;
 
     public void TryHit(Tool tool, Inventory inventory)
     {
@@ -25,6 +28,7 @@ public class Resourse : MonoBehaviour
 
     private void GetResourses(Inventory inventory)
     {
-        inventory.AddItemCount(resourseItem, Random.Range(minCount, maxCount));
+        inventory.AddItemCount(resourseItem, UnityEngine.Random.Range(minCount, maxCount));
+        onGetResourses?.Invoke();
     }
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Rendering;
+using static UnityEditor.Progress;
 
 public class NeedsManager : MonoBehaviour
 {
@@ -34,16 +35,17 @@ public class NeedsManager : MonoBehaviour
 
     private void Update()
     {
+        
         float dt = Time.deltaTime;
         Hunger.PermanentMinus(dt);
-
+        Sleep.PermanentMinus(dt);
         if(Hunger.IsStarving)
         {
             Health.CustomPermanentMinus(healthMinusWhenHungry,dt);
         }
         if(!_playerController.isRunning && !Hunger.IsStarving)
         {
-            Energy.PermanentRestore(energyPlus,dt);
+            Energy.CustomPermanentRestore(energyPlus,dt);
         }
 
     }
@@ -68,10 +70,17 @@ public class NeedsManager : MonoBehaviour
         Energy.Restore(item.usable.energyAmount);
     }
 
-    public void Sleeping(float amount)
+    public void Sleeping(Subject subject)
     {
-        Sleep.Restore(amount);
+        Debug.Log(subject);
+        Debug.Log(subject.name);
+        
+        Health.Restore(subject.usable.healthAmount);
+        Hunger.Restore(subject.usable.hungerAmount);
+        Energy.Restore(subject.usable.energyAmount);
+        Sleep.Restore(subject.usable.sleepAmount);
     }
+    
 }
 
 public class HealthNeed : Need
@@ -99,5 +108,5 @@ public class SleepNeed : Need
 {
     public SleepNeed(float max, float tickRate) : base(max, tickRate) { }
 
-    public bool IsStarving => IsEmpty();
+    public bool IsfallingAsleep => IsEmpty();
 }
