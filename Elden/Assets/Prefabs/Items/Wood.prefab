@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3912460406932877601}
+  - component: {fileID: 4925963224694478796}
   - component: {fileID: 1683482754727423608}
   - component: {fileID: 3852112670387032358}
   - component: {fileID: 678549734334606296}
   - component: {fileID: 8914882689079825058}
-  - component: {fileID: 4925963224694478796}
   m_Layer: 0
   m_Name: Wood
   m_TagString: Untagged
@@ -36,6 +36,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4925963224694478796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3674546938528916084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70ba2f5b84b6ab44eb44cc6cecabe445, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemInteraction
+  item: {fileID: 11400000, guid: 03c13e12d56ce7247b4c8c35cf56832e, type: 2}
 --- !u!33 &1683482754727423608
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -142,16 +155,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4925963224694478796
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3674546938528916084}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70ba2f5b84b6ab44eb44cc6cecabe445, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ItemInteraction
-  item: {fileID: 11400000, guid: 03c13e12d56ce7247b4c8c35cf56832e, type: 2}

@@ -42,7 +42,7 @@ public class PlayerInteraction : MonoBehaviour
                 if (_interactAction.action.triggered)
                 {
                     _playerInventory.AddItem(itemToInteract.item);
-                    _inventoryController.RefreshTool();
+                    _inventoryController.RefreshSelection();
                     Destroy(hit.collider.gameObject);
                 }
             }
@@ -74,7 +74,7 @@ public class PlayerInteraction : MonoBehaviour
             {
                 if (hitTool.collider.gameObject.TryGetComponent<Resourse>(out Resourse resourse))
                 {
-                    resourse.TryHit(_inventoryController.currentTool.tool,_playerInventory);
+                    resourse.TryHit(_inventoryController.currentTool.tool,_playerInventory, hitTool.point);
                 }
             }
         }

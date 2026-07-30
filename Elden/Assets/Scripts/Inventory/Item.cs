@@ -13,6 +13,7 @@ public class Item : ScriptableObject
 
     public Usable usable;
     public Tool tool;
+    public Build build;
 }
 [Serializable]
 public class Usable
@@ -36,4 +37,11 @@ public class Tool
         Weapon
     }
     public ToolType type;
+}
+
+[Serializable]
+public class Build
+{
+    public bool isBuild;
+    public GameObject prefab;
 }

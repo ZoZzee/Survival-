@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5266380745565463916}
   - component: {fileID: 5651094814167760366}
   - component: {fileID: 2121367255722230696}
+  - component: {fileID: 5749413428292181342}
   m_Layer: 0
   m_Name: Rock
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 327444896009293612}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.55991644, z: -0, w: 0.82854915}
+  m_LocalRotation: {x: 0, y: 0.5599162, z: 0, w: 0.82854927}
   m_LocalPosition: {x: 0.14, y: 0.5, z: -7.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -127,6 +128,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Resourse
   resourseItem: {fileID: 11400000, guid: af936af756ca25a4cacd9dcf086240b1, type: 2}
   minCount: 1
-  maxCount: 5
-  durability: 150
+  maxCount: 2
+  getItemEveryHit: 1
+  destroySelf: 1
+  particle: {fileID: 1489325045875443387, guid: b99c4f45aa3e05e408b6b718c490f3e8, type: 3}
+  durability: 170
   toolType: 1
+--- !u!114 &5749413428292181342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327444896009293612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d363e4d815a6a4847a5fb7e179cefa42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParticleOfResourse

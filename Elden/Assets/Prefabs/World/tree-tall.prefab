@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7013208236211933501}
   - component: {fileID: 2009191523447658530}
   - component: {fileID: 6783249730837236528}
+  - component: {fileID: 4696460048878509658}
   m_Layer: 0
   m_Name: tree-tall
   m_TagString: Untagged
@@ -102,5 +103,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a3004b17ce7e5f4b9c0735ea26242db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Resourse
+  resourseItem: {fileID: 11400000, guid: 03c13e12d56ce7247b4c8c35cf56832e, type: 2}
+  minCount: 1
+  maxCount: 3
+  getItemEveryHit: 0
+  destroySelf: 0
+  particle: {fileID: 1489325045875443387, guid: 7df8219834c7d0345ad44f85f8537b27, type: 3}
   durability: 90
   toolType: 0
+--- !u!136 &4696460048878509658
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7611547507857048094}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.37
+  m_Height: 4.79
+  m_Direction: 1
+  m_Center: {x: 0, y: 2, z: 0}

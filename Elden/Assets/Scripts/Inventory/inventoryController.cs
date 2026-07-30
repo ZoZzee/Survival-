@@ -23,11 +23,15 @@ public class inventoryController : MonoBehaviour
     [SerializeField] private Transform _hand;
     private GameObject _currentToolInHand;
 
+    private Item _currentBuild;
+
     [Header("References")]
     private NeedsManager _needsManager;
     [SerializeField] private Inventory _playerInventory;
+    [SerializeField] private PlayerBuilding _playerBuilding;
     private Cell[] cells;
     private Camera _mainCamera;
+
     private void Start()
     {
         cells = _playerInventory.cells;
@@ -102,7 +106,14 @@ public class inventoryController : MonoBehaviour
         RefreshSelection();
     }
 
-    private void RefreshSelection()
+    public void MunisCurrentSelection()
+    {
+        _playerInventory.counts[currentSelection]--;
+        _playerInventory.Refresh();
+        RefreshSelection();
+    }
+
+    public void RefreshSelection()
     {
         for(int i = 0; i < cells.Length; i++)
         {
@@ -111,9 +122,31 @@ public class inventoryController : MonoBehaviour
 
         cells[currentSelection].selection.SetActive(true);
         RefreshTool();
+        RefreshBuild();
     }
-
-    public void RefreshTool()
+    private void RefreshBuild()
+    {
+        if (_playerInventory.items[currentSelection] && _playerInventory.items[currentSelection].build.isBuild)
+        {
+            if (!_currentBuild)
+            {
+                _currentBuild = _playerInventory.items[currentSelection];
+                _playerBuilding.NewBuild(_currentBuild.build.prefab);
+            }
+            else
+            {
+                _playerBuilding.ExidBuildMode();
+                _currentBuild = _playerInventory.items[currentSelection];
+                _playerBuilding.NewBuild(_currentBuild.build.prefab);
+            }
+        }
+        else
+        {
+            _playerBuilding.ExidBuildMode();
+            _currentBuild = null;
+        }
+    }
+    private void RefreshTool()
     {
         if (_playerInventory.items[currentSelection] && _playerInventory.items[currentSelection].tool.isTool)
         {
