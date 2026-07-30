@@ -534,6 +534,7 @@ MonoBehaviour:
   greenMaterial: {fileID: 2100000, guid: a9e08eae04ad0044d8357b7f68a70b96, type: 2}
   redMaterial: {fileID: 2100000, guid: 6d7a1a3ee3a8f5149b2e5aa9549a3539, type: 2}
   buildKey: {fileID: 2708976016845672575, guid: d8ddf1b27b5f76c45a986d6b6143e40d, type: 3}
+  inventoryController: {fileID: 18015563}
 --- !u!1001 &23043492
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1341,7 +1342,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5421550289128463221, guid: 4d59abf263cb36943b621ecd317cf669, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.054494612
+      value: -0.22999999
       objectReference: {fileID: 0}
     - target: {fileID: 5421550289128463221, guid: 4d59abf263cb36943b621ecd317cf669, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1517,7 +1518,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5421550289128463221, guid: 4d59abf263cb36943b621ecd317cf669, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.054494612
+      value: -0.22999999
       objectReference: {fileID: 0}
     - target: {fileID: 5421550289128463221, guid: 4d59abf263cb36943b621ecd317cf669, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3424,7 +3425,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5421550289128463221, guid: 4d59abf263cb36943b621ecd317cf669, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.054494627
+      value: -0.22999999
       objectReference: {fileID: 0}
     - target: {fileID: 5421550289128463221, guid: 4d59abf263cb36943b621ecd317cf669, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4087,6 +4088,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2639397191787468160, guid: 0b672345bfb238544a1784462159b410, type: 3}
   m_PrefabInstance: {fileID: 407145314}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &897292297
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 897292299}
+  - component: {fileID: 897292298}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &897292298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897292297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9df3c8046e622944b4f8eb74a8e20d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveSystem
+  playerInfo:
+    position: {x: 0, y: 0, z: 0}
+--- !u!4 &897292299
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897292297}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &907773702
 GameObject:
   m_ObjectHideFlags: 0
@@ -7195,7 +7242,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5421550289128463221, guid: 4d59abf263cb36943b621ecd317cf669, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.054494612
+      value: -0.22999999
       objectReference: {fileID: 0}
     - target: {fileID: 5421550289128463221, guid: 4d59abf263cb36943b621ecd317cf669, type: 3}
       propertyPath: m_LocalPosition.z
@@ -18175,7 +18222,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5421550289128463221, guid: 4d59abf263cb36943b621ecd317cf669, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.064494625
+      value: -0.24
       objectReference: {fileID: 0}
     - target: {fileID: 5421550289128463221, guid: 4d59abf263cb36943b621ecd317cf669, type: 3}
       propertyPath: m_LocalPosition.z
@@ -19586,3 +19633,4 @@ SceneRoots:
   - {fileID: 8200007074841246254}
   - {fileID: 1750375474384540159}
   - {fileID: 200577310}
+  - {fileID: 897292299}
