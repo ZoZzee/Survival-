@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private CharacterController _characterController;
     [SerializeField] private NeedsManager _needsManager;
     [SerializeField] private Animator _handAnimator;
-
+    private SaveSystem _saveSystem;
 
     [Header("Input")]
     [SerializeField] private PlayerInput _playerInput;
@@ -33,10 +33,41 @@ public class PlayerController : MonoBehaviour
 
     private float p_cameraPitch;
 
+    private bool _canMoov = true;
+
     private void Awake()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+    }
+    private void Start()
+    {
+        _saveSystem = SaveSystem.instance;
+
+        _saveSystem.OnSaveRequested += Save;
+        _saveSystem.OnLoadRequested += Load;
+
+    }
+    private void OnDisable()
+    {
+        _saveSystem.OnSaveRequested -= Save;
+        _saveSystem.OnLoadRequested -= Load;
+    }
+
+    private void Save()
+    {
+        _saveSystem.playerInfo.position = transform.position;
+    }
+    private void Load()
+    {
+        _canMoov = false;
+        transform.position = _saveSystem.playerInfo.position;
+        Invoke(nameof(CanMove), 0.1f);
+    }
+
+    private void CanMove()
+    {
+        _canMoov = true;
     }
 
     private void Update()
@@ -50,39 +81,46 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMovement(Vector2 moveInput)
     {
-        Vector3 direction = new Vector3(moveInput.x, 0f, moveInput.y);
-        direction = Quaternion.Euler(0f, _cameraTramsform.eulerAngles.y, 0f) * direction;
-        direction.y = 0f;
-        direction.Normalize();
-
-        if (_characterController.isGrounded)
+        if (_canMoov)
         {
-            p_verticalVelocity = -1f;
+            Vector3 direction = new Vector3(moveInput.x, 0f, moveInput.y);
+            direction = Quaternion.Euler(0f, _cameraTramsform.eulerAngles.y, 0f) * direction;
+            direction.y = 0f;
+            direction.Normalize();
 
-            if (_jumpAction.action.triggered)
+            if (_characterController.isGrounded)
             {
-                p_verticalVelocity = p_jumpForse;
+                p_verticalVelocity = -1f;
+
+                if (_jumpAction.action.triggered)
+                {
+                    p_verticalVelocity = p_jumpForse;
+                }
             }
+            else
+            {
+                p_verticalVelocity += p_gravity * Time.deltaTime;
+            }
+
+            if (_runAction.action.IsPressed() && _needsManager.Energy.CanRun)
+            {
+                p_moveSpeed = p_runSpeed;
+                _needsManager.Running();
+            }
+            else
+            {
+                p_moveSpeed = p_walkSpeed;
+            }
+
+            Vector3 velocity = direction * p_moveSpeed;
+            velocity.y = p_verticalVelocity;
+            _handAnimator.SetFloat("Velocity", velocity.magnitude);
+            _characterController.Move(velocity * Time.deltaTime);
         }
         else
         {
-            p_verticalVelocity += p_gravity * Time.deltaTime;
+            _handAnimator.SetFloat("Velocity", 0);
         }
-
-        if (_runAction.action.IsPressed() && _needsManager.Energy.CanRun)
-        {
-            p_moveSpeed = p_runSpeed;
-            _needsManager.Running();
-        }
-        else
-        {
-            p_moveSpeed = p_walkSpeed;
-        }
-
-        Vector3 velocity = direction * p_moveSpeed;
-        velocity.y = p_verticalVelocity;
-        _handAnimator.SetFloat("Velocity", velocity.magnitude);
-        _characterController.Move(velocity * Time.deltaTime);
     }
 
     private void HandleLook(Vector2 lookInput)

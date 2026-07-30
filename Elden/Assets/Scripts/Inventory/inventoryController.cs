@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,7 +18,7 @@ public class inventoryController : MonoBehaviour
 
 
     [Header("Tools")]
-    
+
     public Animator handAnimator;
     public Item currentTool;
     [SerializeField] private Transform _hand;
@@ -32,12 +33,41 @@ public class inventoryController : MonoBehaviour
     private Cell[] cells;
     private Camera _mainCamera;
 
+    private SaveSystem _saveSystem;
+
+
     private void Start()
     {
         cells = _playerInventory.cells;
         _needsManager = NeedsManager.instance;
         _mainCamera = Camera.main;
         RefreshSelection();
+
+        _saveSystem = SaveSystem.instance;
+
+        _saveSystem.OnSaveRequested += Save;
+        _saveSystem.OnLoadRequested += Load;
+    }
+
+    private void OnDisable()
+    {
+        _saveSystem.OnSaveRequested -= Save;
+        _saveSystem.OnLoadRequested -= Load;
+    }
+
+    private void Save()
+    {
+        _saveSystem.playerInfo.items = _playerInventory.items;
+        _saveSystem.playerInfo.counts = _playerInventory.counts;
+
+    }
+    private void Load()
+    {
+        _playerInventory.items = _saveSystem.playerInfo.items;
+        _playerInventory.counts = _saveSystem.playerInfo.counts;
+
+        RefreshSelection();
+        _playerInventory.Refresh();
     }
 
     private void Update()
@@ -49,7 +79,7 @@ public class inventoryController : MonoBehaviour
 
     private void HandleUse()
     {
-        if(_useAction.action.triggered)
+        if (_useAction.action.triggered)
         {
             if (_playerInventory.items[currentSelection] && _playerInventory.items[currentSelection].usable.isUsable)
             {
@@ -64,7 +94,7 @@ public class inventoryController : MonoBehaviour
     {
         if (_dropAction.action.triggered && _playerInventory.items[currentSelection])
         {
-            Instantiate (_playerInventory.items[currentSelection].prefab, _mainCamera.transform.position + _mainCamera.transform.forward,Quaternion.identity);
+            Instantiate(_playerInventory.items[currentSelection].prefab, _mainCamera.transform.position + _mainCamera.transform.forward, Quaternion.identity);
             _playerInventory.ItemDropped(currentSelection);
         }
     }
@@ -115,7 +145,7 @@ public class inventoryController : MonoBehaviour
 
     public void RefreshSelection()
     {
-        for(int i = 0; i < cells.Length; i++)
+        for (int i = 0; i < cells.Length; i++)
         {
             cells[i].selection.SetActive(false);
         }
@@ -150,7 +180,7 @@ public class inventoryController : MonoBehaviour
     {
         if (_playerInventory.items[currentSelection] && _playerInventory.items[currentSelection].tool.isTool)
         {
-            if (currentTool && currentTool!= _playerInventory.items[currentSelection])
+            if (currentTool && currentTool != _playerInventory.items[currentSelection])
             {
                 _currentToolInHand.SetActive(false);
                 _currentToolInHand = null;
@@ -171,15 +201,15 @@ public class inventoryController : MonoBehaviour
         {
             for (int i = 0; i < _hand.childCount; i++)
             {
-                if(_currentToolInHand)
+                if (_currentToolInHand)
                 {
                     StartCoroutine(Disactivate(_currentToolInHand));
                     handAnimator.Play("HideTool");
                 }
                 //_hand.GetChild(i).gameObject.SetActive(false);
                 currentTool = null;
-                _currentToolInHand= null;
-            } 
+                _currentToolInHand = null;
+            }
         }
     }
 
