@@ -23,6 +23,8 @@ public class NeedsManager : MonoBehaviour
 
     public static NeedsManager instance;
 
+    private SaveSystem _saveSystem;
+
     private void Awake()
     {
         instance = this;
@@ -31,6 +33,35 @@ public class NeedsManager : MonoBehaviour
         Hunger = new HungerNeed(hungerMax, hungerMinus);
         Energy = new EnergyNeed(energyMax);
         Sleep = new SleepNeed(sleepMax,sleepMinus);
+    }
+    private void Start()
+    {
+        _saveSystem = SaveSystem.instance;
+
+        _saveSystem.OnSaveRequested += Save;
+        _saveSystem.OnLoadRequested += Load;
+
+    }
+    private void OnDisable()
+    {
+        _saveSystem.OnSaveRequested -= Save;
+        _saveSystem.OnLoadRequested -= Load;
+    }
+
+    private void Save()
+    {
+        _saveSystem.playerInfo.energy = Energy.Current;
+        _saveSystem.playerInfo.health = Health.Current;
+        _saveSystem.playerInfo.hunger = Hunger.Current;
+        _saveSystem.playerInfo.sleep = Sleep.Current;
+    }
+    private void Load()
+    {
+        Energy.CurrentSet(_saveSystem.playerInfo.energy);
+        Health.CurrentSet(_saveSystem.playerInfo.health);
+        Hunger.CurrentSet(_saveSystem.playerInfo.hunger);
+        Sleep.CurrentSet(_saveSystem.playerInfo.sleep);
+
     }
 
     private void Update()
@@ -75,10 +106,11 @@ public class NeedsManager : MonoBehaviour
         Debug.Log(subject);
         Debug.Log(subject.name);
         
-        Health.Restore(subject.usable.healthAmount);
-        Hunger.Restore(subject.usable.hungerAmount);
-        Energy.Restore(subject.usable.energyAmount);
-        Sleep.Restore(subject.usable.sleepAmount);
+        Health.Restore(subject.sleap.healthAmount);
+        Hunger.Restore(subject.sleap.hungerAmount);
+        Energy.Restore(subject.sleap.energyAmount);
+        Sleep.Restore(subject.sleap.sleepAmount);
+        _playerController.cantMove(2.7f);
     }
     
 }

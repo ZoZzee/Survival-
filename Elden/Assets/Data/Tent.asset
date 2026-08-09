@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f361c9b7cfc4ba499bdeb89475f1b1e, type: 3}
+  m_Name: Tent
+  m_EditorClassIdentifier: Assembly-CSharp::Item
+  itemName: Tent
+  icon: {fileID: 21300000, guid: 6ffe32d23634eb94cb48b88390e27773, type: 3}
+  prefab: {fileID: 3421083340124188846, guid: fe949f28243cfbb43a2ea3dd878d6a31, type: 3}
+  usable:
+    isUsable: 0
+    healthAmount: 0
+    hungerAmount: 0
+    energyAmount: 0
+  tool:
+    isTool: 0
+    effectiveness: 0
+    durability: 0
+    type: 0
+  build:
+    isBuild: 1
+    prefab: {fileID: 8053618034366086841, guid: ab2e008901109ad42bb5041f42d2e34a, type: 3}

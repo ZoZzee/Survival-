@@ -7,6 +7,7 @@ using UnityEngine;
 public class SaveSystem : MonoBehaviour
 {
     public PlayerInfo playerInfo;
+    public WorldInfo worldInfo;
 
     public event Action OnSaveRequested;
     public event Action OnLoadRequested;
@@ -35,11 +36,14 @@ public class SaveSystem : MonoBehaviour
         OnSaveRequested?.Invoke();
 
         Save("playerInfo",playerInfo);
+        Save("worldInfo",worldInfo);
+
         Debug.Log("Game saved");
     }
     public void LoadAll()
     {
         playerInfo = Load<PlayerInfo>("playerInfo");
+        worldInfo = Load<WorldInfo>("worldInfo");
         
         OnLoadRequested?.Invoke();
         
@@ -70,8 +74,26 @@ public class SaveSystem : MonoBehaviour
 [Serializable]
 public class PlayerInfo
 {
+    public float health;
+    public float hunger;
+    public float energy;
+    public float sleep;
+
     public Vector3 position;
 
     public Item[] items;
     public int[] counts;
+}
+
+[Serializable]
+
+public class WorldInfo
+{
+    public Item[] items;
+    public Vector3[] itemsPosition;
+    public Quaternion[] itemsRotation;
+    public Subject[] build;
+    public Vector3[] buildingsPosition;
+    public Quaternion[] buildingsRotation;
+
 }

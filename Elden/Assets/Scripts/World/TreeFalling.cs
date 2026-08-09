@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TreeFalling : MonoBehaviour
@@ -12,7 +13,7 @@ public class TreeFalling : MonoBehaviour
         resourses.onGetResourses += Fall;
     }
 
-    public void Fall()
+    private void Fall()
     {
         rb.isKinematic = false;
         rb.useGravity = true;

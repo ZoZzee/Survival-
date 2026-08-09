@@ -12,6 +12,7 @@ public class Resourse : MonoBehaviour
 
     [SerializeField] private bool getItemEveryHit;
     [SerializeField] private bool destroySelf;
+    [SerializeField] private bool isDestroy;
 
     [SerializeField] private ParticleSystem particle;
 
@@ -31,13 +32,13 @@ public class Resourse : MonoBehaviour
             onHitResourses?.Invoke(newParticl);
             
             
-            if(durability <= 0)
+            if(durability <= 0 && !isDestroy)
             {
-                
                 GetResourses(inventory);
                 if(destroySelf) Destroy(gameObject);
+                isDestroy = true;
             }
-            else if(getItemEveryHit)
+            else if(getItemEveryHit )
             {
                 GetResourses(inventory);
             }

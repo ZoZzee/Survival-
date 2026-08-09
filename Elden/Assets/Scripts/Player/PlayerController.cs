@@ -1,3 +1,5 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -60,11 +62,14 @@ public class PlayerController : MonoBehaviour
     }
     private void Load()
     {
-        _canMoov = false;
         transform.position = _saveSystem.playerInfo.position;
-        Invoke(nameof(CanMove), 0.1f);
+        cantMove(0.1f);
     }
-
+    public void cantMove(float timer = 0.1f)
+    {
+        _canMoov = false;
+        Invoke(nameof(CanMove), timer);
+    }
     private void CanMove()
     {
         _canMoov = true;

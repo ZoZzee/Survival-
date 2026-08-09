@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad372d7cb90de1949b2e6ed59eeefed1, type: 3}
-  m_Name: Bed
+  m_Name: Tent
   m_EditorClassIdentifier: Assembly-CSharp::Subject
-  subjectName: Bed
-  icon: {fileID: 21300000, guid: a80ab5dd274673f4f9dd28776caae0e8, type: 3}
-  prefab: {fileID: 919132149155446097, guid: ae783d5c290f9994b9e7f0349579e8d9, type: 3}
-  usable:
+  subjectName: Tent
+  prefab: {fileID: 8053618034366086841, guid: ab2e008901109ad42bb5041f42d2e34a, type: 3}
+  sleap:
     isUsable: 1
-    healthAmount: 20
-    hungerAmount: -10
+    healthAmount: 15
+    hungerAmount: -15
     energyAmount: 100
     sleepAmount: 100

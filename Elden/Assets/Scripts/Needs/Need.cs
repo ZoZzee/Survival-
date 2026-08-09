@@ -51,5 +51,10 @@ public abstract class Need
     {
         return Current <= minValue;
     }
+    public virtual void CurrentSet(float value)
+    {
+        if(value <= Max)
+        Current = value;
+    }
 
 }

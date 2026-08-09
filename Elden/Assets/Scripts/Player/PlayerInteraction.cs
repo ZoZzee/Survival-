@@ -19,6 +19,7 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private Inventory _playerInventory;
     [SerializeField] private inventoryController _inventoryController;
 
+
     [Header("Input")]
     [SerializeField] private InputActionReference _interactAction;
     [SerializeField] private InputActionReference _useToolAction;
@@ -51,7 +52,7 @@ public class PlayerInteraction : MonoBehaviour
                 _interactionText.text = subjectInteraction.subject.subjectName;
                 if (_interactAction.action.triggered)
                 {
-                    if (subjectInteraction.subject.subjectName == "Bed")
+                    if (subjectInteraction.subject.subjectName == "Tent")
                     {
                         UI_Effects.Sleep();
                         _needsManager.Sleeping(subjectInteraction.subject);

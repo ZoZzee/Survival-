@@ -94,8 +94,9 @@ public class inventoryController : MonoBehaviour
     {
         if (_dropAction.action.triggered && _playerInventory.items[currentSelection])
         {
-            Instantiate(_playerInventory.items[currentSelection].prefab, _mainCamera.transform.position + _mainCamera.transform.forward, Quaternion.identity);
+            Instantiate(_playerInventory.items[currentSelection].prefab, _mainCamera.transform.position + _mainCamera.transform.forward, Quaternion.identity,ItemsManager.instance.transform);
             _playerInventory.ItemDropped(currentSelection);
+            RefreshSelection();
         }
     }
     private void HandleSelection()

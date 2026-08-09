@@ -6,14 +6,13 @@ using UnityEngine;
 public class Subject : ScriptableObject
 {
     public string subjectName;
-    public Sprite icon;
 
     public GameObject prefab;
 
-    public Interaction usable;
+    public Sleap sleap;
 }
 [Serializable]
-public class Interaction
+public class Sleap
 {
     public bool isUsable;
     public float healthAmount;

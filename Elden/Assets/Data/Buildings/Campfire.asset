@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad372d7cb90de1949b2e6ed59eeefed1, type: 3}
+  m_Name: Campfire
+  m_EditorClassIdentifier: Assembly-CSharp::Subject
+  subjectName: Campfire
+  prefab: {fileID: 2517221036027262948, guid: 3e9e12f093316f5428f8172fb53cc2fa, type: 3}
+  sleap:
+    isUsable: 0
+    healthAmount: 0
+    hungerAmount: 0
+    energyAmount: 0
+    sleepAmount: 0
