@@ -1,10 +1,11 @@
+using System;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public Item[] items;
-    public int[] counts;
-    public Cell[] cells;
+    public Equipment inventory;
+    public Equipment bagInventory;
+
 
     private void Start()
     {
@@ -14,25 +15,52 @@ public class Inventory : MonoBehaviour
     public void AddItem(Item newItem)
     {
         bool haveItem = false;
-        for (int i = 0; i < items.Length; i++)
+        bool addInInventory = false;
+
+        for (int i = 0; i < inventory.items.Length; i++)
         {
-            if (items[i] == newItem)
+            if (inventory.items[i] == newItem)
             {
                 haveItem = true;
-                counts[i] += 1;
+                inventory.counts[i] += 1;
                 break;
+            }
+        }
+        if (!haveItem)
+        {
+            for (int i = 0; i < bagInventory.items.Length; i++)
+            {
+                if (bagInventory.items[i] == newItem)
+                {
+                    haveItem = true;
+                    bagInventory.counts[i] += 1;
+                    break;
+                }
             }
         }
 
         if (!haveItem)
         {
-            for (int i = 0; i < items.Length; i++)
+            for (int i = 0; i < inventory.items.Length; i++)
             {
-                if (items[i] == null)
+                if (inventory.items[i] == null)
                 {
-                    items[i] = newItem;
-                    counts[i] = 1;
+                    inventory.items[i] = newItem;
+                    inventory.counts[i] = 1;
+                    addInInventory = true;
                     break;
+                }
+            }
+            if (!addInInventory)
+            {
+                for (int i = 0; i < bagInventory.items.Length; i++)
+                {
+                    if (bagInventory.items[i] == null)
+                    {
+                        bagInventory.items[i] = newItem;
+                        bagInventory.counts[i] = 1;
+                        break;
+                    }
                 }
             }
         }
@@ -46,27 +74,42 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void ItemDropped(int index)
+    public void ItemDropped(Equipment inventory,int index)
     {
-        counts[index]--;
+        inventory.counts[index]--;
 
-        if (counts[index] == 0)
+        if (inventory.counts[index] == 0)
         {
-            items[index ] = null;
+            inventory.items[index ] = null;
         }
         Refresh();
     }
 
     public void Refresh()
     {
-        for(int i = 0; i < cells.Length; i++)
+        for(int i = 0; i < inventory.cells.Length; i++)
         {
-            if (counts[i] == 0 && items[i] != null)
+            if (inventory.counts[i] == 0 && inventory.items[i] != null)
             {
-                items[i] = null;
+                inventory.items[i] = null;
             }
-            cells[i].RefreshCell(items[i], counts[i]);
+            inventory.cells[i].RefreshCell(inventory.items[i], inventory.counts[i]);
+        }
+        for (int i = 0; i < bagInventory.cells.Length; i++)
+        {
+            if (bagInventory.counts[i] == 0 && bagInventory.items[i] != null)
+            {
+                bagInventory.items[i] = null;
+            }
+            bagInventory.cells[i].RefreshCell(bagInventory.items[i], bagInventory.counts[i]);
         }
     }
 
+}
+[Serializable]
+public class Equipment
+{
+    public Item[] items;
+    public int[] counts;
+    public Cell[] cells;
 }

@@ -38,7 +38,7 @@ public class inventoryController : MonoBehaviour
 
     private void Start()
     {
-        cells = _playerInventory.cells;
+        cells = _playerInventory.inventory.cells;
         _needsManager = NeedsManager.instance;
         _mainCamera = Camera.main;
         RefreshSelection();
@@ -57,14 +57,14 @@ public class inventoryController : MonoBehaviour
 
     private void Save()
     {
-        _saveSystem.playerInfo.items = _playerInventory.items;
-        _saveSystem.playerInfo.counts = _playerInventory.counts;
+        _saveSystem.playerInfo.items = _playerInventory.inventory.items;
+        _saveSystem.playerInfo.counts = _playerInventory.inventory.counts;
 
     }
     private void Load()
     {
-        _playerInventory.items = _saveSystem.playerInfo.items;
-        _playerInventory.counts = _saveSystem.playerInfo.counts;
+        _playerInventory.inventory.items = _saveSystem.playerInfo.items;
+        _playerInventory.inventory.counts = _saveSystem.playerInfo.counts;
 
         RefreshSelection();
         _playerInventory.Refresh();
@@ -81,10 +81,10 @@ public class inventoryController : MonoBehaviour
     {
         if (_useAction.action.triggered)
         {
-            if (_playerInventory.items[currentSelection] && _playerInventory.items[currentSelection].usable.isUsable)
+            if (_playerInventory.inventory.items[currentSelection] && _playerInventory.inventory.items[currentSelection].usable.isUsable)
             {
-                _needsManager.UseItem(_playerInventory.items[currentSelection]);
-                _playerInventory.counts[currentSelection]--;
+                _needsManager.UseItem(_playerInventory.inventory.items[currentSelection]);
+                _playerInventory.inventory.counts[currentSelection]--;
                 _playerInventory.Refresh();
             }
         }
@@ -92,10 +92,10 @@ public class inventoryController : MonoBehaviour
 
     private void HandleDrop()
     {
-        if (_dropAction.action.triggered && _playerInventory.items[currentSelection])
+        if (_dropAction.action.triggered && _playerInventory.inventory.items[currentSelection])
         {
-            Instantiate(_playerInventory.items[currentSelection].prefab, _mainCamera.transform.position + _mainCamera.transform.forward, Quaternion.identity,ItemsManager.instance.transform);
-            _playerInventory.ItemDropped(currentSelection);
+            Instantiate(_playerInventory.inventory.items[currentSelection].prefab, _mainCamera.transform.position + _mainCamera.transform.forward, Quaternion.identity,ItemsManager.instance.transform);
+            _playerInventory.ItemDropped(_playerInventory.inventory,currentSelection);
             RefreshSelection();
         }
     }
@@ -127,10 +127,10 @@ public class inventoryController : MonoBehaviour
         currentSelection += value;
         if (currentSelection < 0)
         {
-            currentSelection = _playerInventory.cells.Length - 1;  //Перехід на останню ячейку інвентарря
+            currentSelection = _playerInventory.inventory.cells.Length - 1;  //Перехід на останню ячейку інвентарря
         }
 
-        else if (currentSelection > _playerInventory.cells.Length - 1)
+        else if (currentSelection > _playerInventory.inventory.cells.Length - 1)
         {
             currentSelection = 0;  //Перехід на першу ячейку інвентарря
         }
@@ -139,7 +139,7 @@ public class inventoryController : MonoBehaviour
 
     public void MunisCurrentSelection()
     {
-        _playerInventory.counts[currentSelection]--;
+        _playerInventory.inventory.counts[currentSelection]--;
         _playerInventory.Refresh();
         RefreshSelection();
     }
@@ -157,17 +157,17 @@ public class inventoryController : MonoBehaviour
     }
     private void RefreshBuild()
     {
-        if (_playerInventory.items[currentSelection] && _playerInventory.items[currentSelection].build.isBuild)
+        if (_playerInventory.inventory.items[currentSelection] && _playerInventory.inventory.items[currentSelection].build.isBuild)
         {
             if (!_currentBuild)
             {
-                _currentBuild = _playerInventory.items[currentSelection];
+                _currentBuild = _playerInventory.inventory.items[currentSelection];
                 _playerBuilding.NewBuild(_currentBuild.build.prefab);
             }
             else
             {
                 _playerBuilding.ExidBuildMode();
-                _currentBuild = _playerInventory.items[currentSelection];
+                _currentBuild = _playerInventory.inventory.items[currentSelection];
                 _playerBuilding.NewBuild(_currentBuild.build.prefab);
             }
         }
@@ -179,9 +179,9 @@ public class inventoryController : MonoBehaviour
     }
     private void RefreshTool()
     {
-        if (_playerInventory.items[currentSelection] && _playerInventory.items[currentSelection].tool.isTool)
+        if (_playerInventory.inventory.items[currentSelection] && _playerInventory.inventory.items[currentSelection].tool.isTool)
         {
-            if (currentTool && currentTool != _playerInventory.items[currentSelection])
+            if (currentTool && currentTool != _playerInventory.inventory.items[currentSelection])
             {
                 _currentToolInHand.SetActive(false);
                 _currentToolInHand = null;
@@ -189,10 +189,10 @@ public class inventoryController : MonoBehaviour
             }
             for (int i = 0; i < _hand.childCount; i++)
             {
-                if (_hand.GetChild(i).name == _playerInventory.items[currentSelection].itemName)
+                if (_hand.GetChild(i).name == _playerInventory.inventory.items[currentSelection].itemName)
                 {
                     _hand.GetChild(i).gameObject.SetActive(true);
-                    currentTool = _playerInventory.items[currentSelection];
+                    currentTool = _playerInventory.inventory.items[currentSelection];
                     _currentToolInHand = _hand.GetChild(i).gameObject;
                     handAnimator.Play("TakeTool");
                 }

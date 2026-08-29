@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private NeedsManager _needsManager;
     [SerializeField] private Animator _handAnimator;
     private SaveSystem _saveSystem;
+    [SerializeField] private GameObject _bag;
 
     [Header("Input")]
     [SerializeField] private PlayerInput _playerInput;
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private InputActionReference _lookAction;
     [SerializeField] private InputActionReference _jumpAction;
     [SerializeField] private InputActionReference _runAction;
+    [SerializeField] private InputActionReference _InventoryBagAction;
 
     private Vector2 p_moveInput;
     private Vector2 p_lookInput;
@@ -82,8 +84,26 @@ public class PlayerController : MonoBehaviour
 
         HandleMovement(p_moveInput);
         HandleLook(p_lookInput);
+        
+            InventoryActivation();
+        
     }
-
+    private void InventoryActivation()
+    {
+        if (_InventoryBagAction.action.triggered)
+        {
+            Cursor.visible = !Cursor.visible;
+            if(Cursor.visible == true)
+            {
+                Cursor.lockState = CursorLockMode.Confined;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+            _bag.SetActive(!_bag.activeSelf);
+        }
+    }
     private void HandleMovement(Vector2 moveInput)
     {
         if (_canMoov)
