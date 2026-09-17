@@ -557,8 +557,7 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
-    - {fileID: 0}
-    counts: 00000000000000000000000000000000000000000000000000000000
+    counts: 000000000000000000000000000000000000000000000000
     cells:
     - {fileID: 1485721114}
     - {fileID: 335081077}
@@ -566,7 +565,6 @@ MonoBehaviour:
     - {fileID: 810889126}
     - {fileID: 1753051166}
     - {fileID: 1385972600}
-    - {fileID: 1494039473}
 --- !u!114 &18015563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -590,6 +588,7 @@ MonoBehaviour:
   _hand: {fileID: 1221855176}
   _playerInventory: {fileID: 18015562}
   _playerBuilding: {fileID: 18015566}
+  cells: []
 --- !u!114 &18015564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4805,8 +4804,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9148639f14932cf429fc66e5cf7b2296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DraggItems
+  _inventoryController: {fileID: 18015563}
   _inventory: {fileID: 18015562}
-  _newMoveCell: {fileID: 6743166725469647647}
+  _newMoveCell: {fileID: 7941961118409011213}
 --- !u!225 &830540072
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -8179,6 +8179,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cell (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 7806237511845994079, guid: 8d26481cb9055aa44b25c386c04daed3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8189,17 +8193,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6256281548880848681, guid: 8d26481cb9055aa44b25c386c04daed3, type: 3}
   m_PrefabInstance: {fileID: 1494039471}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1494039473 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6914813575429709132, guid: 8d26481cb9055aa44b25c386c04daed3, type: 3}
-  m_PrefabInstance: {fileID: 1494039471}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc01bf4abd1eab149ad406fc3a18f55a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Cell
 --- !u!4 &1551754829 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2639397191787468160, guid: 0b672345bfb238544a1784462159b410, type: 3}
@@ -17977,23 +17970,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &6743166725469647647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7941961118409011212}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc01bf4abd1eab149ad406fc3a18f55a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Cell
-  icon: {fileID: 3316441876517060272}
-  countText: {fileID: 4101524609739792612}
-  selection: {fileID: 0}
-  itemInCell: {fileID: 0}
-  inventory: {fileID: 0}
 --- !u!1 &6797183716024842017
 GameObject:
   m_ObjectHideFlags: 0
@@ -18748,7 +18724,8 @@ GameObject:
   - component: {fileID: 6102402562941307258}
   - component: {fileID: 2536564868307953257}
   - component: {fileID: 4661211482533551310}
-  - component: {fileID: 6743166725469647647}
+  - component: {fileID: 7941961118409011214}
+  - component: {fileID: 7941961118409011213}
   m_Layer: 5
   m_Name: Cell
   m_TagString: Untagged
@@ -18756,6 +18733,37 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!114 &7941961118409011213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7941961118409011212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f53f842863377174a80193dced5a0829, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SelectionCell
+  _inventory: {fileID: 18015562}
+  moveItem: {fileID: 0}
+  interactionCell: {fileID: 7941961118409011214}
+--- !u!114 &7941961118409011214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7941961118409011212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc01bf4abd1eab149ad406fc3a18f55a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Cell
+  icon: {fileID: 3316441876517060272}
+  countText: {fileID: 4101524609739792612}
+  selection: {fileID: 0}
+  inventory: {fileID: 0}
 --- !u!114 &7945674670271882257
 MonoBehaviour:
   m_ObjectHideFlags: 0

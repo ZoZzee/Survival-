@@ -28,9 +28,9 @@ public class inventoryController : MonoBehaviour
 
     [Header("References")]
     private NeedsManager _needsManager;
-    [SerializeField] private Inventory _playerInventory;
+    [SerializeField] public Inventory _playerInventory; // Зробив публічним для бистрого прототипування інвентарю
     [SerializeField] private PlayerBuilding _playerBuilding;
-    private Cell[] cells;
+    public Cell[] cells;
     private Camera _mainCamera;
 
     private SaveSystem _saveSystem;

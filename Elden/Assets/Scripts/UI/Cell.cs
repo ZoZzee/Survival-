@@ -10,17 +10,14 @@ public class Cell : MonoBehaviour
 
     public GameObject selection;
 
-    public Item itemInCell;
-
     [HideInInspector] public Inventory inventory;
 
-    public void RefreshCell(Item item,int count)
+    public void RefreshCell(Item item,int count = 0)
     {
         if(item != null)
         {
             icon.enabled = true;
             icon.sprite = item.icon;
-            itemInCell = item;
             if (count > 1)
             {
                 countText.text = count.ToString();
@@ -34,7 +31,6 @@ public class Cell : MonoBehaviour
         {
             icon.enabled = false;
             icon.sprite = null;
-            itemInCell = null;
             countText.text = "";
         }
     }
