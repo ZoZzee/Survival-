@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator _handAnimator;
     private SaveSystem _saveSystem;
     [SerializeField] private GameObject _bag;
+    [SerializeField] private Map _map;
 
     [Header("Input")]
     [SerializeField] private PlayerInput _playerInput;
@@ -31,6 +32,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private InputActionReference _jumpAction;
     [SerializeField] private InputActionReference _runAction;
     [SerializeField] private InputActionReference _InventoryBagAction;
+    [SerializeField] private InputActionReference _mapAction;
 
     private Vector2 p_moveInput;
     private Vector2 p_lookInput;
@@ -72,6 +74,10 @@ public class PlayerController : MonoBehaviour
         _canMoov = false;
         Invoke(nameof(CanMove), timer);
     }
+    public void movePermanent()
+    {
+        _canMoov = !_canMoov;
+    }
     private void CanMove()
     {
         _canMoov = true;
@@ -85,23 +91,41 @@ public class PlayerController : MonoBehaviour
         HandleMovement(p_moveInput);
         HandleLook(p_lookInput);
         
-            InventoryActivation();
+        InventoryActivation();
+        MapActivation();
+
+
+    }
+
+    private void MapActivation()
+    {
+        if(_mapAction.action.triggered)
+        {
+            cursorVisibleAndLock();
+            movePermanent();
+            _map.inActivate();
+        }
         
     }
     private void InventoryActivation()
     {
         if (_InventoryBagAction.action.triggered)
         {
-            Cursor.visible = !Cursor.visible;
-            if(Cursor.visible == true)
-            {
-                Cursor.lockState = CursorLockMode.Confined;
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-            }
+            cursorVisibleAndLock();
             _bag.SetActive(!_bag.activeSelf);
+        }
+    }
+
+    private void cursorVisibleAndLock()
+    {
+        Cursor.visible = !Cursor.visible;
+        if (Cursor.visible == true)
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
     private void HandleMovement(Vector2 moveInput)
@@ -150,10 +174,13 @@ public class PlayerController : MonoBehaviour
 
     private void HandleLook(Vector2 lookInput)
     {
-        transform.Rotate(Vector3.up * lookInput.x * p_rotationSpeed * Time.deltaTime);
-        p_cameraPitch -= lookInput.y * p_rotationSpeed * Time.deltaTime;
-        p_cameraPitch = Mathf.Clamp(p_cameraPitch, -_cameraLimit, _cameraLimit);
-        _cameraTramsform.localEulerAngles = new Vector3(p_cameraPitch,0f,0f); 
+        if (_canMoov)
+        {
+            transform.Rotate(Vector3.up * lookInput.x * p_rotationSpeed * Time.deltaTime);
+            p_cameraPitch -= lookInput.y * p_rotationSpeed * Time.deltaTime;
+            p_cameraPitch = Mathf.Clamp(p_cameraPitch, -_cameraLimit, _cameraLimit);
+            _cameraTramsform.localEulerAngles = new Vector3(p_cameraPitch, 0f, 0f);
+        }
     }
 
 }
